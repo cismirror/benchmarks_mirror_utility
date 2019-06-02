@@ -4,6 +4,6 @@ CHROME ={
 	'downloads': r"/downloads" #benchrmarks repo path
 }
 EMAIL = {
-        username: "example@gmail.com_example", #gmail username
-        password: "", #gmail password
+        'username': "example@gmail.com_example", #gmail username
+        'password': "", #gmail password
 }
