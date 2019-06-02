@@ -37,7 +37,7 @@ def request_benchmarks(driver):
                 break;    
     
     #also need to check some check boxes
-    inputs = driver.find_elements_by_css_selector('.hs-form-booleancheckbox-display.req-label input')
+    inputs = driver.find_elements_by_css_selector('.hs-form-booleancheckbox-display input')
     for i in inputs:
         i.send_keys(Keys.SPACE)
     
