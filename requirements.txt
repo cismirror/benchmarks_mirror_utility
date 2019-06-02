@@ -1,0 +1,3 @@
+imbox==0.9.5
+pkg-resources==0.0.0
+selenium==3.14.0

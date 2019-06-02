@@ -1,0 +1,9 @@
+CHROME ={
+	'binary': '/usr/bin/chromium-browser', #chrome binary path
+	'driver': '/usr/local/bin/chromedriver', #chromedriver path
+	'downloads': r"/downloads" #benchrmarks repo path
+}
+EMAIL = {
+        username: "example@gmail.com_example", #gmail username
+        password: "", #gmail password
+}
