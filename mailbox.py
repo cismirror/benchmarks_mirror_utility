@@ -19,7 +19,7 @@ def get_url():
 
 
 def mark_all_as_seen():
-	with Imbox(config.EMAIL['imap_server']
+	with Imbox(config.EMAIL['imap_server'],
                 username=config.EMAIL['username'],
                 password=config.EMAIL['password'],
 		ssl=True,
