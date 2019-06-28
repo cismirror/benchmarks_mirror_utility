@@ -2,7 +2,7 @@ from imbox import Imbox
 import config
 
 def get_url():
-	with Imbox('imap.gmail.com',
+	with Imbox(config.EMAIL['imap_server'],
                 username=config.EMAIL['username'],
                 password=config.EMAIL['password'],
 		ssl=True,
@@ -19,7 +19,7 @@ def get_url():
 
 
 def mark_all_as_seen():
-	with Imbox('imap.gmail.com',
+	with Imbox(config.EMAIL['imap_server']
                 username=config.EMAIL['username'],
                 password=config.EMAIL['password'],
 		ssl=True,
