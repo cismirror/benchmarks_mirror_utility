@@ -86,3 +86,4 @@ download_benchmarks(driver)
 
 print('commiting to github')
 github.commit()
+print('benchmarks_mirror_utility_done')
