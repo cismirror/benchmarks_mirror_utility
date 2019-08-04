@@ -3,8 +3,5 @@ CHROME ={
 	'driver': '/usr/local/bin/chromedriver', #chromedriver path
 	'downloads': r"/downloads" #benchrmarks repo path
 }
-EMAIL = {
-	'imap_server': 'imap.gmail.com',
-        'username': "example@gmail.com_example", #gmail username
-        'password': "", #gmail password
-}
+EMAIL = "ses@example.com"
+QUEUE_NAME = "SQS_queue_name"

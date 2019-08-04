@@ -1,4 +1,4 @@
-import time, mailbox, chrome, config 
+import time, boto3, chrome, config 
 from selenium.webdriver.common.keys import Keys  
 import github
 
@@ -24,7 +24,7 @@ def request_benchmarks(driver):
             i.send_keys('a')
         if n == 'email':
             i.click()
-            i.send_keys(config.EMAIL['username'])
+            i.send_keys(config.EMAIL)
     
     #some inputs are <select> elements, we have to click those
     inputs = driver.find_elements_by_css_selector('select')
@@ -41,37 +41,37 @@ def request_benchmarks(driver):
     for i in inputs:
         i.send_keys(Keys.SPACE)
     
-    #before the form is submited - mark all emails as seen in the mailbox
-    #so that when we check email, the first thing we will get will be email from CIS
-    mailbox.mark_all_as_seen()
-
     #submit form
     button = driver.find_elements_by_css_selector('.hs-button.primary.large')[0]
     button.click()
 
 def download_benchmarks(driver):
     #get the download URL from the email
-    url=mailbox.get_url()
-    import pdb    
-    if(url != None):
-        driver.get(url)
-        #giving the page some extra time to do what it needs to do
-        print('sleeping for 60, just to make sure everything is ready')
-        time.sleep(60)
-        links = driver.find_elements_by_css_selector('[title="Download PDF"]')
-        print("got " + str(len(links)) + " links")
-        c = 0
-        for link in links:
-            c = c+1
-            print("getting " + str(c) + "/" + str(len(links)) + " link ")
-            link.click()
-            driver.get(link.get_attribute('href'))
-        print("wait a minute to finish downloading the benchmarks")
-        time.sleep(60)
-        print("close Chrome")
-        driver.quit()
-    else:
-        raise Exception('Cant find a link in the email!')
+    sqs = boto3.resource('sqs')
+    queue = sqs.get_queue_by_name(QueueName=config.QUEUE_NAME)
+    done = False
+    # Process messages by printing out body and optional author name
+    for message in queue.receive_messages():
+        url = message.body
+        message.delete()
+        if not done: 
+            print('Downloading the benchmarks from: %s'.format(url))
+            driver.get(url)
+            #giving the page some extra time to do what it needs to do
+            print('sleeping for 60, just to make sure everything is ready')
+            time.sleep(60)
+            links = driver.find_elements_by_css_selector('[title="Download PDF"]')
+            print("got " + str(len(links)) + " links")
+            c = 0
+            for link in links:
+                c = c+1
+                print("getting " + str(c) + "/" + str(len(links)) + " link ")
+                link.click()
+                driver.get(link.get_attribute('href'))
+            print("wait a minute to finish downloading the benchmarks")
+            time.sleep(60)
+            print("close Chrome")
+            driver.quit()
 
 driver = chrome.setup_chrome()
 print('requesting benchmarks')
