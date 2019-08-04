@@ -4,4 +4,5 @@ CHROME ={
 	'downloads': r"/downloads" #benchrmarks repo path
 }
 EMAIL = "ses@example.com"
+REGION = "aws region"
 QUEUE_NAME = "SQS_queue_name"
