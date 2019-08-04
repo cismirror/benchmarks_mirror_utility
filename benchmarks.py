@@ -48,7 +48,7 @@ def request_benchmarks(driver):
 def download_benchmarks(driver):
     #get the download URL from the email
     sqs = boto3.resource('sqs', region_name=config.REGION)
-    queue = sqs.get_queue_by_name(QueueName=config.QUEUE_NAME)
+    queue = sqs.Queue(config.QUEUE_URL)
     done = False
     # Process messages by printing out body and optional author name
     for message in queue.receive_messages():

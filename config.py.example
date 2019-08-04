@@ -5,4 +5,4 @@ CHROME ={
 }
 EMAIL = "ses@example.com"
 REGION = "aws region"
-QUEUE_NAME = "SQS_queue_name"
+QUEUE_URL = "SQS_queue_url"
