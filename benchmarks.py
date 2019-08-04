@@ -54,7 +54,8 @@ def download_benchmarks(driver):
     for message in queue.receive_messages():
         url = message.body
         message.delete()
-        if not done: 
+        if not done:
+            done = True
             print('Downloading the benchmarks from: %s'.format(url))
             driver.get(url)
             #giving the page some extra time to do what it needs to do
