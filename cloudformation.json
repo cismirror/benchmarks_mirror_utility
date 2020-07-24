@@ -1,0 +1,40 @@
+{
+  "Parameters" : {
+    "KeyName": {
+      "Description" : "Name of an existing EC2 KeyPair to enable SSH access to the instance",
+      "Type": "AWS::EC2::KeyPair::KeyName",
+      "ConstraintDescription" : "Can contain only ASCII characters."
+    },
+    "SecurityGroupName": {
+      "Description" : "Name of an existing EC2 Security Group that should be applied to the instance",
+      "Type": "AWS::EC2::SecurityGroup::GroupName",
+      "ConstraintDescription" : "Can contain only ASCII characters."
+    },
+    "IamInstanceProfileName": {
+      "Description" : "Name of an existing IAM role hat should be applied to the instance",
+      "Type": "AWS::IAM::InstanceProfile::InstanceProfileName",
+      "ConstraintDescription" : "Can contain only ASCII characters."
+    }},
+    "Resources": {
+        "EC2Instance": {
+          "Type" : "AWS::EC2::Instance",
+          "Properties" : {
+              "AvailabilityZone": "us-east-1a",
+              "IamInstanceProfile": "{ "Ref" : "IamInstanceProfileName" }",
+              "ImageId" : "ami-07ebfd5b3428b6f4d",
+              "InstanceType" : "t2.micro",
+              "KeyName" : { "Ref" : "KeyName" },
+              "SecurityGroups" : [ { "Ref" : "SecurityGroupName" } ],
+              "Volumes" : [ { "Device": "/dev/sdf", "VolumeId": { "Ref": "EBSvolume" }} ]
+            }
+        },
+        "EBSvolume": {
+          "Type" : "AWS::EC2::Volume",
+          "Properties" : {
+              "AvailabilityZone": "us-east-1a",
+              "Size" : 8,
+              "VolumeType" : "gp2"
+            }
+        }
+    }
+}
