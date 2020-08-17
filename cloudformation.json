@@ -20,7 +20,7 @@
           "Type" : "AWS::EC2::Instance",
           "Properties" : {
               "AvailabilityZone": "us-east-1a",
-              "IamInstanceProfile": "{ "Ref" : "IamInstanceProfileName" }",
+              "IamInstanceProfile": { "Ref" : "IamInstanceProfileName" },
               "ImageId" : "ami-07ebfd5b3428b6f4d",
               "InstanceType" : "t2.micro",
               "KeyName" : { "Ref" : "KeyName" },
