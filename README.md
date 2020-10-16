@@ -1,3 +1,6 @@
+## This doesn't work any more, since CIS added a CAPTCHA to their downloads page. This is left here as an archive of what used to work
+
+
 This is the script that updates https://github.com/cismirror/benchmarks repository. It is provided here so you can run your own copy if you want to. This is what it does:
 - Runs headless chromium
 - Goes to https://learn.cisecurity.org/benchmarks
